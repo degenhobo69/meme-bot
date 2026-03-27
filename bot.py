@@ -1,4 +1,4 @@
-print("NEW VERSION RUNNING")
+print("NEW VERSION RUNNING v2")
 
 import os
 import requests
