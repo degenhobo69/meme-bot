@@ -66,19 +66,10 @@ def analyze(text):
 
     return score, caption
 
-def run():
-    posts = get_memes()
-
-    for p in posts:
-        score, caption = analyze(p)
-
-        if score >= 7:
-            bot.send_message(
-                chat_id=CHAT_ID,
-                text=f"🔥 {caption}\n\n{p}"
-            )
-            time.sleep(2)
-
-while True:
+    def run():
+    bot.send_message(
+        chat_id=CHAT_ID,
+        text="✅ Bot is working!"
+    )   
     run()
-    time.sleep(1800)
+    
