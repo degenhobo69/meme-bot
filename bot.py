@@ -28,19 +28,25 @@ def get_memes():
         return []
 
 def run():
+    def run():
     while True:
-        memes = get_memes()
+        try:
+            memes = get_memes()
 
-        for meme in memes:
-            try:
-                bot.send_message(
-                    chat_id=CHAT_ID,
-                    text=f"😂 {meme}"
-                )
-                time.sleep(3)
-            except Exception as e:
-                print("Send error:", e)
+            for meme in memes[:5]:  # send 5 memes
+                try:
+                    bot.send_message(
+                        chat_id=CHAT_ID,
+                        text=f"😂 {meme}"
+                    )
+                    time.sleep(2)  # small delay between each message
+                except Exception as e:
+                    print("Send error:", e)
 
-        time.sleep(120)
+            time.sleep(120)  # wait 2 minutes before next batch
+
+        except Exception as e:
+            print("Error:", e)
+            time.sleep(30)
 
 run()
