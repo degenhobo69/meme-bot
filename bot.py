@@ -41,6 +41,6 @@ def run():
             except Exception as e:
                 print("Send error:", e)
 
-        time.sleep(1800)  # every 30 minutes
+        time.sleep(120)
 
 run()
