@@ -13,17 +13,30 @@ client = OpenAI(api_key=OPENAI_API_KEY)
 
 def get_memes():
     url = "https://www.reddit.com/r/memes/top.json?limit=5&t=day"
-    headers = {"User-agent": "Mozilla/5.0"}
-    res = requests.get(url, headers=headers)
-    data = res.json()
+    headers = {
+        "User-Agent": "Mozilla/5.0 (iPhone; CPU iPhone OS 16_0 like Mac OS X)"
+    }
 
-    posts = []
-    for p in data["data"]["children"]:
-        title = p["data"]["title"]
-        link = "https://reddit.com" + p["data"]["permalink"]
-        posts.append(f"{title}\n{link}")
+    try:
+        res = requests.get(url, headers=headers, timeout=10)
 
-    return posts
+        if res.status_code != 200:
+            print("Reddit blocked request")
+            return []
+
+        data = res.json()
+
+        posts = []
+        for p in data["data"]["children"]:
+            title = p["data"]["title"]
+            link = "https://reddit.com" + p["data"]["permalink"]
+            posts.append(f"{title}\n{link}")
+
+        return posts
+
+    except Exception as e:
+        print("Error fetching memes:", e)
+        return []
 
 def analyze(text):
     prompt = f"""
