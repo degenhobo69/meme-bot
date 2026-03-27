@@ -1,5 +1,6 @@
+print("NEW VERSION RUNNING")
+
 import os
-import time
 import requests
 import asyncio
 from telegram import Bot
@@ -22,8 +23,9 @@ def get_memes():
             memes.append(f"{title}\n{link}")
 
         return memes
+
     except Exception as e:
-        print("Error:", e)
+        print("Error fetching memes:", e)
         return []
 
 async def run():
@@ -44,7 +46,7 @@ async def run():
             await asyncio.sleep(120)  # 2 minutes
 
         except Exception as e:
-            print("Error:", e)
+            print("Main loop error:", e)
             await asyncio.sleep(30)
 
 asyncio.run(run())
